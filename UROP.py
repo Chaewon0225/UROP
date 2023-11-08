@@ -6,6 +6,6 @@ FINAL_LEVEL = 12
 START_SPEED = 10
 
 def draw():
-    screen.blit("bedroom", (0, 0))
+    screen.blit("kitchen", (0, 0))
     
 pgzrun.go()
