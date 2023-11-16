@@ -26,8 +26,4 @@ for cook in functions:
             if cook.collidepoint(pos):
                 screen.draw.filled_rect(cookw, "papaya whip")
 
-
-def draw():
-    screen.blit("kitchen", (0, 0))
-    
 pgzrun.go()
