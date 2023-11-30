@@ -1,0 +1,56 @@
+import pygame
+import sys
+
+# Initialize Pygame
+pygame.init()
+
+# Constants
+WIDTH, HEIGHT = 800, 600
+BUTTON_WIDTH, BUTTON_HEIGHT = 300, 50
+BUTTON_COLOR_INACTIVE = (100, 100, 100)
+BUTTON_COLOR_ACTIVE = (150, 150, 150)
+BUTTON_TEXT_COLOR = (255, 255, 255)
+IMAGE_SIZE = 150
+
+# Set up the display
+screen = pygame.display.set_mode((WIDTH, HEIGHT))
+pygame.display.set_caption("Image Pop-up on Button Click")
+
+
+# Load image
+image = pygame.image.load('Beef Curry.png')
+image = pygame.transform.scale(image, (IMAGE_SIZE, IMAGE_SIZE))
+
+# Button rectangle
+button_rect = pygame.Rect(WIDTH // 2 - BUTTON_WIDTH // 2, HEIGHT // 2 - BUTTON_HEIGHT // 2, BUTTON_WIDTH, BUTTON_HEIGHT)
+
+# Variable to track if the image should be shown
+show_image = False
+
+running = True
+while running:
+    screen.fill((255, 255, 255))
+
+    # Check events
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
+        elif event.type == pygame.MOUSEBUTTONDOWN:
+            # Check if the mouse click is within the button area
+            if button_rect.collidepoint(event.pos):
+                # Toggle showing the image
+                show_image = not show_image
+
+    # Draw button
+    button_color = BUTTON_COLOR_ACTIVE if button_rect.collidepoint(pygame.mouse.get_pos()) else BUTTON_COLOR_INACTIVE
+    pygame.draw.rect(screen, button_color, button_rect)
+
+    # Draw the image if 'show_image' is True
+    if show_image:
+        screen.blit(image, (WIDTH // 2 - IMAGE_SIZE // 2, HEIGHT // 2 - IMAGE_SIZE // 2))
+
+    pygame.display.flip()
+
+# Quit Pygame properly
+pygame.quit()
+sys.exit()
