@@ -1,0 +1,28 @@
+   def drag_window(self, manager):
+        self.moving = False
+        if self.on_drag and manager.drag_lock == self and self.on_resize == False:
+            self.x.value += manager.rel[0]
+            self.y.value += manager.rel[1]
+            self.moving = True
+            self.update_checks()
+
+    def release_drag_lock(self, manager):
+        if pg.mouse.get_pressed(3)[0] == False:
+            self.on_drag = False
+            self.on_resize = False
+            self.status = WindowState.CONTROL_LOST
+            manager.drag_lock = None
+
+    def gain_drag_lock(self, manager):
+        self.checks_are_pressed = self.topleft.collidepoint(
+            manager.mousepos
+        ) or self.topright.collidepoint(manager.mousepos)
+
+        if (
+            pg.Rect(self.pos, self.handle.get_size()).collidepoint(manager.mousepos)
+            and self.checks_are_pressed == False
+        ):
+            if pg.mouse.get_pressed(3)[0] and manager.drag_lock == None:
+                self.on_drag = True
+                self.status = WindowState.CONTROL_GAIN
+                manager.drag_lock = self
