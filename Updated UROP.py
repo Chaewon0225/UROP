@@ -1,4 +1,12 @@
+from pygame import mixer
+import pygame
 import pgzrun
+import sys
+
+pygame.init()
+
+mixer.music.load('backgroundmusic.mp3')
+mixer.music.play(-1)
 
 WIDTH, HEIGHT = 1000, 600
 
