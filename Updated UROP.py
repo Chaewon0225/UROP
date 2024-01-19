@@ -2,6 +2,7 @@ from pygame import mixer
 import pygame
 import pgzrun
 import sys
+import os
 
 pygame.init()
 
@@ -26,7 +27,7 @@ image_names = [
 ]
 
 image_folder = (r"C:\Users\user\Desktop\UROP\images")  
-images = {name: pygame.image.load(os.path.join(image_folder, f"{name}.png")) for name in image_names)
+images = {name: pygame.image.load(os.path.join(image_folder, f"{name}.png")) for name in image_names}
 
 RECT_WIDTH, RECT_HEIGHT = 250, 150
 rect_x = (WIDTH - RECT_WIDTH) // 2  # Centering the rectangle horizontally
@@ -40,20 +41,20 @@ cook_rect = Rect(425, 400, 100, 25)  # cook
 fridge_rect = Rect(25, 200, 150, 50)  # fridge
 cookbook_rect = Rect(700, 400, 100, 25)  # cookbook
 
-class FoodSprite(pygame.sprite.Sprite):
-            def __init__(self, image, x, y):
-              super().__init__()
-            self.image = image
-            self.rect = self.image.get_rect()
-            self.rect.x = col * (self.rect.width + 10)
-            self.rect.y = row * (self.rect.height + 10)
-            food_group = pygame.sprite.Group()
-            for row in range(4):
-                  for col in range(5):
-                     index = row * 5 + col
-                  if index < len(image_names):
-                      food_sprite = FoodSprite(images[image_names[index]], row, col)
-                      food_group.add(food_sprite)
+#class FoodSprite(pygame.sprite.Sprite):
+ #           def __init__(self, image, x, y):
+  #            super().__init__()
+   #         self.images = images
+    #        self.rect = self.image.get_rect()
+     #       self.rect.x = col * (self.rect.width + 10)
+      #      self.rect.y = row * (self.rect.height + 10)
+       #     food_group = pygame.sprite.Group()
+        #    for row in range(4):
+         #         for col in range(5):
+          #           index = row * 5 + col
+           #       if index < len(image_names):
+            #          food_sprite = FoodSprite(images[image_names[index]], row, col)
+             #         food_group.add(food_sprite)
 
 class Fridge(pygame.sprite.Sprite):
     def __init__(self):
@@ -66,7 +67,6 @@ class Fridge(pygame.sprite.Sprite):
 
 food_group = pygame.sprite.Group()
 fridge_group = pygame.sprite.Group()
-
 fridge = Fridge()
 fridge_group.add(fridge)
                       
