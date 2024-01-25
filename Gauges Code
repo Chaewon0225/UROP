@@ -23,6 +23,9 @@ c_key_val = 0
         screen.draw.filled_rect(gauge1_rect, 'orange')
         screen.draw.filled_rect(gauge2_rect, 'green')
         screen.draw.filled_rect(gauge3_rect, 'blue')
+
+
+
 #added this to the bottom of the code in order to deal with button input (placeholder for actual gauge input)
 def on_key_down(key):
     global a_key_pressed
