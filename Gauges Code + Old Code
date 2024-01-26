@@ -2,6 +2,7 @@ from pygame import mixer
 import pygame
 import pgzrun
 import sys
+import os
 
 pygame.init()
 
@@ -17,6 +18,23 @@ background_images = [
     'diningtable.png'
 ]
 current_background = 0
+
+
+
+
+image_names = [
+    "beef", "broccoli", "cheese", "chicken", "cream", "egg", "fish", 
+    "flour", "ham", "milk", "misopaste", "oil", "onion", "potato", 
+    "rice", "spinach", "sugar", "sushivinegar", "tofu", "tomato"
+]
+
+image_folder = r"/Users/collinmay/Desktop/UROP Project/Visual sources/ingredients"
+images = {name: pygame.image.load(os.path.join(image_folder, f"{name}.png")) for name in image_names}
+
+
+
+
+
 
 overlay_image = pygame.image.load("empty gauge.png")
 overlay2_image = pygame.image.load("empty gauge.png")
@@ -46,11 +64,41 @@ cookbook_rect = Rect(700, 400, 100, 25)  # cookbook
 gauge1_rect = Rect(783, 20, 10, 25)
 gauge2_rect = Rect(783, 55, 10, 25)
 gauge3_rect = Rect(783, 90, 10, 25)
-#functions = [cook, fridge, cookbook]
-#cookw = Rect(300, 300, 300, 300)
-#fridgew = Rect(300, 300, 300, 300)
-#cookbookw = Rect(300, 300, 300, 300)
-#windows = [cookw, fridgew, cookbookw]
+
+
+
+class FoodSprite(pygame.sprite.Sprite):
+    def __init__(self, image, x, y):
+        super().__init__()
+        self.image = image
+        self.rect = self.image.get_rect()
+        self.rect.x = x
+        self.rect.y = y
+
+food_group = pygame.sprite.Group()
+
+for row in range(4):
+    for col in range(5):
+        index = row * 5 + col
+        if index < len(image_names):
+            food_sprite = FoodSprite(images[image_names[index]], col * (RECT_WIDTH + 10), row * (RECT_HEIGHT + 10))
+            food_group.add(food_sprite)
+
+class Fridge(pygame.sprite.Sprite):
+    def __init__(self):
+        super().__init__()
+        self.image = pygame.Surface((100, 100))
+        self.image.fill((0, 0, 255))
+        self.rect = self.image.get_rect()
+        self.rect.x = 50
+        self.rect.y = 50
+
+fridge_group = pygame.sprite.Group()
+fridge = Fridge()
+fridge_group.add(fridge)
+
+
+
 
 # Flag to track whether 'A' key is pressed
 a_key_pressed = False
@@ -68,7 +116,7 @@ c_key_val = 0
 
 def draw():
     screen.blit(background_images[current_background], (0, 0))
-    if draw_rectangles:  # If not visible and flag set, draw the rectangles
+    if draw_rectangles and button_visible == False:  # If not visible and flag set, draw the rectangles
         screen.blit(overlay_image, overlay_rect)
         screen.blit(overlay2_image, overlay2_rect)
         screen.blit(overlay3_image, overlay3_rect)
