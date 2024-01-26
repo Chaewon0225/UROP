@@ -1,0 +1,190 @@
+from pygame import mixer
+import pygame
+import pgzrun
+import sys
+
+pygame.init()
+
+mixer.music.load('backgroundmusic.mp3')
+mixer.music.play(-1)
+
+WIDTH, HEIGHT = 1000, 600
+
+background_images = [
+    'nutriquest.png',
+    'kitchen.png',
+    'bedroom.png',
+    'diningtable.png'
+]
+current_background = 0
+
+overlay_image = pygame.image.load("empty gauge.png")
+overlay2_image = pygame.image.load("empty gauge.png")
+overlay3_image = pygame.image.load("empty gauge.png")
+# Resize overlay image
+scale_factor = 0.06
+overlay_image = pygame.transform.scale(overlay_image, (int(overlay_image.get_width() * scale_factor), int(overlay_image.get_height() * scale_factor)))
+overlay2_image = pygame.transform.scale(overlay2_image, (int(overlay2_image.get_width() * scale_factor), int(overlay2_image.get_height() * scale_factor)))
+overlay3_image = pygame.transform.scale(overlay3_image, (int(overlay3_image.get_width() * scale_factor), int(overlay3_image.get_height() * scale_factor)))
+
+
+RECT_WIDTH, RECT_HEIGHT = 250, 150
+rect_x = (WIDTH - RECT_WIDTH) // 2  # Centering the rectangle horizontally
+rect_y = (HEIGHT - RECT_HEIGHT) // 2  # Centering the rectangle vertically
+
+button_rect = Rect(rect_x, rect_y, RECT_WIDTH, RECT_HEIGHT)
+button_visible = True  # Flag to track button visibility
+draw_rectangles = False  # Flag to control drawing of rectangles
+
+overlay_rect = overlay_image.get_rect(topleft=(778, 18))
+overlay2_rect = overlay2_image.get_rect(topleft=(778, 53))
+overlay3_rect = overlay3_image.get_rect(topleft=(778, 88))
+
+cook_rect = Rect(425, 400, 100, 25)  # cook
+fridge_rect = Rect(25, 200, 150, 50)  # fridge
+cookbook_rect = Rect(700, 400, 100, 25)  # cookbook
+gauge1_rect = Rect(783, 20, 10, 25)
+gauge2_rect = Rect(783, 55, 10, 25)
+gauge3_rect = Rect(783, 90, 10, 25)
+#functions = [cook, fridge, cookbook]
+#cookw = Rect(300, 300, 300, 300)
+#fridgew = Rect(300, 300, 300, 300)
+#cookbookw = Rect(300, 300, 300, 300)
+#windows = [cookw, fridgew, cookbookw]
+
+# Flag to track whether 'A' key is pressed
+a_key_pressed = False
+a_key_val = 0
+s_key_pressed = False
+s_key_val = 0
+d_key_pressed = False
+d_key_val = 0
+z_key_pressed = False
+z_key_val = 0
+x_key_pressed = False
+x_key_val = 0
+c_key_pressed = False
+c_key_val = 0
+
+def draw():
+    screen.blit(background_images[current_background], (0, 0))
+    if draw_rectangles:  # If not visible and flag set, draw the rectangles
+        screen.blit(overlay_image, overlay_rect)
+        screen.blit(overlay2_image, overlay2_rect)
+        screen.blit(overlay3_image, overlay3_rect)
+        screen.draw.filled_rect(cook_rect, 'white')
+        screen.draw.text("COOK", center=cook_rect.center, color='black', fontsize=20)
+        screen.draw.filled_rect(fridge_rect, 'white')
+        screen.draw.text("FRIDGE", center=fridge_rect.center, color='black', fontsize=40)
+        screen.draw.filled_rect(cookbook_rect, 'white')
+        screen.draw.text("COOKBOOK", center=cookbook_rect.center, color='black', fontsize=20)
+        screen.draw.filled_rect(gauge1_rect, 'orange')
+        screen.draw.text("SATIATION", center=overlay_rect.center, color='black', fontsize=22)
+        screen.draw.filled_rect(gauge2_rect, 'green')
+        screen.draw.text("SATISFACTION", center=overlay2_rect.center, color='black', fontsize=22)
+        screen.draw.filled_rect(gauge3_rect, 'yellow')
+        screen.draw.text("NUTRITION", center=overlay3_rect.center, color='black', fontsize=22)
+
+
+
+def on_mouse_down(pos):
+    global current_background, button_visible
+    if button_rect.collidepoint(pos) and button_visible:
+        current_background = (current_background + 1) % len(background_images)
+        button_visible = False  # Hide the button once it's pressed
+
+def on_mouse_up():
+    global draw_rectangles
+    draw_rectangles = True  # Set flag to draw rectangles
+
+def on_key_down(key):
+    global a_key_pressed
+    if key == pygame.K_a:
+        a_key_pressed = True
+    global s_key_pressed
+    if key == pygame.K_s:
+        s_key_pressed = True
+    global d_key_pressed
+    if key == pygame.K_d:
+        d_key_pressed = True
+    global z_key_pressed
+    if key == pygame.K_z:
+        z_key_pressed = True
+    global x_key_pressed
+    if key == pygame.K_x:
+        x_key_pressed = True
+    global c_key_pressed
+    if key == pygame.K_c:
+        c_key_pressed = True
+
+def on_key_up(key):
+    global a_key_pressed
+    if key == pygame.K_a:
+        a_key_pressed = False
+    global s_key_pressed
+    if key == pygame.K_s:
+        s_key_pressed = False
+    global d_key_pressed
+    if key == pygame.K_d:
+        d_key_pressed = False
+    global z_key_pressed
+    if key == pygame.K_z:
+        z_key_pressed = False
+    global x_key_pressed
+    if key == pygame.K_x:
+        x_key_pressed = False
+    global c_key_pressed
+    if key == pygame.K_c:
+        c_key_pressed = False
+
+def update():
+    global a_key_pressed
+    global a_key_val
+    global z_key_val
+    if a_key_pressed and a_key_val < 130:
+            # Extend the length of gauge1_rect when 'A' key is pressed
+            gauge1_rect.width += 13
+            a_key_val += 13
+            z_key_val -= 13
+            a_key_pressed = False
+    global s_key_pressed
+    global s_key_val
+    global x_key_val
+    if s_key_pressed and s_key_val < 130:
+            # Extend the length of gauge1_rect when 'A' key is pressed
+            gauge2_rect.width += 13
+            s_key_val += 13
+            x_key_val -= 13
+            s_key_pressed = False
+    global d_key_pressed
+    global d_key_val
+    global c_key_val
+    if d_key_pressed and d_key_val < 130:
+            # Extend the length of gauge1_rect when 'A' key is pressed
+            gauge3_rect.width += 13
+            d_key_val += 13
+            c_key_val -= 13
+            d_key_pressed = False
+    global z_key_pressed
+    if z_key_pressed and z_key_val < 130 and a_key_val > 0:
+            # Extend the length of gauge1_rect when 'A' key is pressed
+            gauge1_rect.width -= 13
+            a_key_val -= 13
+            z_key_val += 13
+            z_key_pressed = False
+    global x_key_pressed
+    if x_key_pressed and x_key_val < 130 and s_key_val > 0:
+            # Extend the length of gauge1_rect when 'A' key is pressed
+            gauge2_rect.width -= 13
+            s_key_val -= 13
+            x_key_val += 13
+            x_key_pressed = False
+    global c_key_pressed
+    if c_key_pressed and c_key_val < 130 and d_key_val > 0:
+            # Extend the length of gauge1_rect when 'A' key is pressed
+            gauge3_rect.width -= 13
+            d_key_val -= 13
+            c_key_val += 13
+            c_key_pressed = False
+
+pgzrun.go()
