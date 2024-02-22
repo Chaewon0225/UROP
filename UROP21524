@@ -25,12 +25,106 @@ image_list = [
     'tofu.png', 'tomato.png',
 ]
 
+#1
+cupcakes_image = pygame.image.load("cupcakes.png")
+cupcakes_rect = cupcakes_image.get_rect(center=(500,300))
 
+#2
+frenchfries_image = pygame.image.load("frenchfries.png")
+frenchfries_rect = frenchfries_image.get_rect(center=(500,300))
+
+#3
+milkshake_image = pygame.image.load("milkshake.png")
+milkshake_rect = milkshake_image.get_rect(center=(500,300))
+
+#4
+cheesestick_image = pygame.image.load("cheesestick.png")
+cheesestick_rect = cheesestick_image.get_rect(center=(500,300))
+
+#5
+friedchicken_image = pygame.image.load("friedchicken.png")
+friedchicken_rect = friedchicken_image.get_rect(center=(500,300))
+
+#6
+onionring_image = pygame.image.load("onionring.png")
+onionring_rect = onionring_image.get_rect(center=(500,300))
+
+#7
+cheesepizza_image = pygame.image.load("cheesepizza.png")
+cheesepizza_rect = cheesepizza_image.get_rect(center=(500,300))
+
+#8
+cheesecake_image = pygame.image.load("cheesecake.png")
+cheesecake_rect = cheesecake_image.get_rect(center=(500,300))
+
+#9
+donuts_image = pygame.image.load("donuts.png")
+donuts_rect = donuts_image.get_rect(center=(500,300))
+
+#10
+cheesefries_image = pygame.image.load("cheesefries.png")
+cheesefries_rect = cheesefries_image.get_rect(center=(500,300))
+
+#11
+misosoup_image = pygame.image.load("misosoup.png")
+misosoup_rect = misosoup_image.get_rect(center=(500,300))
+
+#12
+omelet_image = pygame.image.load("omelet.png")
+omelet_rect = omelet_image.get_rect(center=(500,300))
+
+#13
+tofubowl_image = pygame.image.load("tofubowl.png")
+tofubowl_rect = tofubowl_image.get_rect(center=(500,300))
+
+#14
 steak_image = pygame.image.load("steak.png")
 steak_rect = steak_image.get_rect(center=(500,300))
 
-steakCooked = False
+#15
+veggiestew_image = pygame.image.load("veggiestew.png")
+veggiestew_rect = veggiestew_image.get_rect(center=(500,300))
 
+#16
+meatloaf_image = pygame.image.load("meatloaf.png")
+meatloaf_rect = meatloaf_image.get_rect(center=(500,300))
+
+#17
+cobbsalad_image = pygame.image.load("cobbsalad.png")
+cobbsalad_rect = cobbsalad_image.get_rect(center=(500,300))
+
+#18
+beefcurry_image = pygame.image.load("beefcurry.png")
+beefcurry_rect = beefcurry_image.get_rect(center=(500,300))
+
+#19
+sushi_image = pygame.image.load("sushi.png")
+sushi_rect = sushi_image.get_rect(center=(500,300))
+
+#20
+grilledfish_image = pygame.image.load("grilledfish.png")
+grilledfish_rect = grilledfish_image.get_rect(center=(500,300))
+
+cupcakesCooked = False
+frenchfriesCooked = False
+milkshakeCooked = False
+cheesestickCooked = False
+friedchickenCooked = False 
+onionringCooked = False
+cheesepizzaCooked = False
+cheesecakeCooked = False
+donutsCooked = False
+cheesefriesCooked = False
+misosoupCooked = False
+omeletCooked = False
+tofubowlCooked = False
+steakCooked = False
+veggiestewCooked = False
+meatloafCooked = False
+cobbsaladCooked = False
+beefcurryCooked = False
+sushiCooked = False
+grilledfishCooked = False
 
 image_names = r"/Users/collinmay/Desktop/UROP Project/Visual sources/ingredients"
 images = {name: pygame.image.load(os.path.join(image_names, name)) for name in image_list}
@@ -226,15 +320,49 @@ def draw():
         if current_target_index == 3:
             screen.blit(cook_image, cook_rect)
 
+    if cupcakesCooked:
+        screen.blit(cupcakes_image, cupcakes_rect)
+    if frenchfriesCooked:
+        screen.blit(frenchfries_image, frenchfries_rect)
+    if milkshakeCooked:
+        screen.blit(milkshake_image, milkshake_rect)
+    if cheesestickCooked:
+        screen.blit(cheesestick_image, cheesestick_rect)
+    if friedchickenCooked:
+        screen.blit(friedchicken_image, friedchicken_rect)
+    if onionringCooked:
+        screen.blit(onionring_image, onionring_rect)
+    if cheesepizzaCooked:
+        screen.blit(cheesepizza_image, cheesepizza_rect)
+    if cheesecakeCooked:
+        screen.blit(cheesecake_image, cheesecake_rect)
+    if donutsCooked:
+        screen.blit(donuts_image, donuts_rect)
+    if cheesefriesCooked:
+        screen.blit(cheesefries_image, cheesefries_rect)
+    if misosoupCooked:
+        screen.blit(misosoup_image, misosoup_rect)
+    if omeletCooked:
+        screen.blit(omelet_image, omelet_rect)
+    if tofubowlCooked:
+        screen.blit(tofubowl_image, tofubowl_rect)
     if steakCooked:
         screen.blit(steak_image, steak_rect)
-
+    if veggiestewCooked:
+        screen.blit(veggiestew_image, veggiestew_rect)
+    if meatloafCooked:
+        screen.blit(meatloaf_image, meatloaf_rect)
+    if cobbsaladCooked:
+        screen.blit(cobbsalad_image, cobbsalad_rect)
+    if beefcurryCooked:
+        screen.blit(beefcurry_image, beefcurry_rect)
+    if sushiCooked:
+        screen.blit(sushi_image, sushi_rect)
+    if grilledfishCooked:
+        screen.blit(grilledfish_image, grilledfish_rect)
     if cookingFail:
         screen.blit(cookingFail_image,cookingFail_rect)
         
-             
-
-
 removed_sprites_count = 0
 sprites_in_hand = list(food_group)[:3]  # Assuming you want the first 3 sprites
 hand_sprites_count = len(sprites_in_hand)
@@ -243,13 +371,10 @@ target_locations = [(380, 260), (450, 260), (515, 255)]
 selected_sprite_filenames = []
 images_rev = {v: k for k, v in images.items()}
 
-
 for sprite, target_location in zip(sprites_in_hand, target_locations):
     sprite.rect.topleft = target_location
 
-
 current_target_index = 0
-
 
 def on_mouse_down(pos):
     global current_background, button_visible,draw_rectangles
@@ -278,9 +403,52 @@ def on_mouse_down(pos):
                 selected_sprite_filenames.append(filename)
                 print(selected_sprite_filenames)
     if cook_rect.collidepoint(pos):
-        global steakCooked, cookingFail
+        global cupcakesCooked, frenchfriesCooked, milkshakeCooked, cheesestickCooked, friedchickenCooked, onionringCooked, cheesepizzaCooked, cheesecakeCooked, donutsCooked, cheesefriesCooked, misosoupCooked, omeletCooked, tofubowlCooked, steakCooked, veggiestewCooked, meatloafCooked, cobbsaladCooked, beefcurryCooked, sushiCooked, grilledfishCooked, cookingFail 
+        if selected_sprite_filenames == ['flour.png', 'sugar.png', 'cream.png']:
+            cupcakesCooked = True
+        if selected_sprite_filenames == ['flour.png', 'sugar.png', 'milk.png']:
+            cupcakesCooked = True
+        if selected_sprite_filenames == ['flour.png', 'oil.png', 'potato.png']:
+            frenchfriesCooked = True
+        if selected_sprite_filenames == ['milk.png', 'sugar.png', 'cream.png']:
+            milkshakeCooked = True
+        if selected_sprite_filenames == ['milk.png', 'sugar.png', 'egg.png']:
+            milkshakeCooked = True
+        if selected_sprite_filenames == ['flour.png', 'oil.png', 'cheese.png']:
+            cheesestickCooked = True
+        if selected_sprite_filenames == ['flour.png', 'oil.png', 'chicken.png']:
+            friedchickenCooked = True
+        if selected_sprite_filenames == ['flour.png', 'oil.png', 'onion.png']:
+            onionringCooked = True
+        if selected_sprite_filenames == ['flour.png', 'tomato.png', 'cheese.png']:
+            cheesepizzaCooked = True
+        if selected_sprite_filenames == ['flour.png', 'cheese.png', 'sugar.png']:
+            cheesecakeCooked = True
+        if selected_sprite_filenames == ['flour.png', 'oil.png', 'sugar.png']:
+            dountsCooked = True
+        if selected_sprite_filenames == ['cheese.png', 'oil.png', 'potato.png']:
+            cheesefriesCooked = True
+        if selected_sprite_filenames == ['spinach.png', 'tofu.png', 'misopaste.png']:
+            misosoupCooked = True
+        if selected_sprite_filenames == ['spinach.png', 'egg.png', 'tomato.png']:
+            omeletCooked = True
+        if selected_sprite_filenames == ['spinach.png', 'tofu.png', 'rice.png']:
+            tofubowlCooked = True
         if selected_sprite_filenames == ['beef.png', 'broccoli.png', 'onion.png']:
             steakCooked = True
+        if selected_sprite_filenames == ['broccoli.png', 'tomato.png', 'onion.png']:
+            veggiestewCooked = True
+        if selected_sprite_filenames == ['beef.png', 'flour.png', 'onion.png']:
+            meatloafCooked = True
+        if selected_sprite_filenames == ['tomato.png', 'spinach.png', 'egg.png']:
+            cobbsaladCooked = True
+        if selected_sprite_filenames == ['beef.png', 'rice.png', 'onion.png']:
+            beefcurryCooked = True
+        if selected_sprite_filenames == ['fish.png', 'rice.png', 'sushivinegar.png']:
+            sushiCooked = True
+        if selected_sprite_filenames == ['fish.png', 'broccoli.png', 'onion.png']:
+            grilledfishCooked = True
+
         else: 
             cookingFail = True
         fridgeOverlayActive = False
